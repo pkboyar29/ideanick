@@ -1,7 +1,5 @@
 import { initTRPC } from '@trpc/server';
 
-const trpc = initTRPC.create();
-
 const ideas = [
   {
     nick: 'cool-idea-nick-1',
@@ -29,6 +27,8 @@ const ideas = [
     description: 'Description of idea 5...',
   },
 ];
+
+const trpc = initTRPC.create();
 
 export const trpcRouter = trpc.router({
   getIdeas: trpc.procedure.query(() => {
