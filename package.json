@@ -1,5 +1,16 @@
 {
   "name": "ideanick",
   "private": true,
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "scripts": {
+    "b": "pnpm --filter @ideanick/backend",
+    "w": "pnpm --filter @ideanick/webapp",
+    "dev": "pnpm -r --parallel dev",
+    "types": "concurrently 'pnpm b types' 'pnpm w types'",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "husky": "^9.1.7"
+  }
 }
