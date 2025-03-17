@@ -3,6 +3,7 @@ import {
   getAllIdeasRoute,
   getNewIdeaRoute,
   getSignUpRoute,
+  getSignInRoute,
 } from '../../lib/routes';
 import css from './index.module.scss';
 
@@ -27,6 +28,12 @@ export const Layout = () => {
           <li className={css.item}>
             <Link className={css.link} to={getSignUpRoute()}>
               Sign Up
+            </Link>
+          </li>
+
+          <li className={css.item}>
+            <Link className={css.link} to={getSignInRoute()}>
+              Sign In
             </Link>
           </li>
         </ul>

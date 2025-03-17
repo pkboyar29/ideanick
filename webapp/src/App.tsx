@@ -5,6 +5,7 @@ import { AllIdeasPage } from './pages/AllIdeasPage';
 import { ViewIdeaPage } from './pages/ViewIdeaPage';
 import { NewIdeaPage } from './pages/NewIdeaPage';
 import { SignUpPage } from './pages/SignUpPage';
+import { SignInPage } from './pages/SignInPage';
 import { Layout } from './components/Layout';
 
 import './styles/global.scss';
@@ -16,6 +17,7 @@ export const App = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
+            <Route path={routes.getSignInRoute()} element={<SignInPage />} />
             <Route
               path={routes.getAllIdeasRoute()}
               element={<AllIdeasPage />}
