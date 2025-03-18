@@ -8,10 +8,15 @@ import { FormItems } from '../../components/FormItems';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { trpc } from '../../lib/trpc';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import { getAllIdeasRoute } from '../../lib/routes';
 
 export const SignInPage = () => {
-  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+  const navigate = useNavigate();
+
   const [submittingError, setSubmittingError] = useState<string | null>(null);
+  const trpcUtils = trpc.useUtils();
   const signIn = trpc.signIn.useMutation();
   const formik = useFormik({
     initialValues: {
@@ -22,12 +27,10 @@ export const SignInPage = () => {
     onSubmit: async (values) => {
       try {
         setSubmittingError(null);
-        await signIn.mutateAsync(values);
-        formik.resetForm();
-        setSuccessMessageVisible(true);
-        setTimeout(() => {
-          setSuccessMessageVisible(false);
-        }, 3000);
+        const { token } = await signIn.mutateAsync(values);
+        Cookies.set('token', token, { expires: 99999 });
+        trpcUtils.invalidate();
+        navigate(getAllIdeasRoute());
       } catch (err: any) {
         setSubmittingError(err.message);
       }
@@ -49,9 +52,6 @@ export const SignInPage = () => {
             <Alert color="red">Some fields are invalid</Alert>
           )}
           {submittingError && <Alert color="red">{submittingError}</Alert>}
-          {successMessageVisible && (
-            <Alert color="green">Thanks for sign in!</Alert>
-          )}
           <Button loading={formik.isSubmitting}>Sign In</Button>
         </FormItems>
       </form>

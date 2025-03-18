@@ -9,12 +9,14 @@ import { SignInPage } from './pages/SignInPage';
 import { Layout } from './components/Layout';
 
 import './styles/global.scss';
+import { SignOutPage } from './pages/SignOutPage';
 
 export const App = () => {
   return (
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
+          <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
           <Route element={<Layout />}>
             <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
             <Route path={routes.getSignInRoute()} element={<SignInPage />} />
