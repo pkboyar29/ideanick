@@ -7,10 +7,10 @@ import {
   getSignOutRoute,
 } from '../../lib/routes';
 import css from './index.module.scss';
-import { trpc } from '../../lib/trpc';
+import { useMe } from '../../lib/ctx';
 
 export const Layout = () => {
-  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery();
+  const me = useMe();
 
   return (
     <div className={css.layout}>
@@ -23,7 +23,7 @@ export const Layout = () => {
             </Link>
           </li>
 
-          {isLoading || isFetching || isError ? null : data.me ? (
+          {me ? (
             <>
               {' '}
               <li className={css.item}>
@@ -33,7 +33,7 @@ export const Layout = () => {
               </li>
               <li className={css.item}>
                 <Link className={css.link} to={getSignOutRoute()}>
-                  Log out ({data.me.nick})
+                  Log out ({me.nick})
                 </Link>
               </li>
             </>
