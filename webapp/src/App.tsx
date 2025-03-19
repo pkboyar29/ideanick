@@ -1,3 +1,5 @@
+import './styles/global.scss';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import * as routes from './lib/routes';
 import { TrpcProvider } from './lib/trpc';
@@ -7,9 +9,8 @@ import { NewIdeaPage } from './pages/NewIdeaPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { SignInPage } from './pages/SignInPage';
 import { Layout } from './components/Layout';
-
-import './styles/global.scss';
 import { SignOutPage } from './pages/SignOutPage';
+import { EditIdeaPage } from './pages/EditIdeaPage';
 
 export const App = () => {
   return (
@@ -28,6 +29,10 @@ export const App = () => {
             <Route
               path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)}
               element={<ViewIdeaPage />}
+            />
+            <Route
+              path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)}
+              element={<EditIdeaPage />}
             />
           </Route>{' '}
         </Routes>
