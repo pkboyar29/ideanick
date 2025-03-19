@@ -2,20 +2,15 @@ import cn from 'classnames';
 import css from './index.module.scss';
 import { Link } from 'react-router-dom';
 
-export const Button = ({
-  children,
-  loading = false,
-}: {
-  children: React.ReactNode;
-  loading?: boolean;
-}) => {
+export type ButtonProps = { children: React.ReactNode; loading?: boolean };
+export const Button = ({ children, loading = false }: ButtonProps) => {
   return (
     <button
       className={cn({ [css.button]: true, [css.disabled]: loading })}
       type="submit"
       disabled={loading}
     >
-      {loading ? 'Submitting...' : children}
+      {loading ? 'Submitting...' : children}{' '}
     </button>
   );
 };
