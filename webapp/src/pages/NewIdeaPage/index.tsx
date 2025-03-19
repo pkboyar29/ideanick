@@ -1,7 +1,4 @@
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
 import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input';
-import { useState } from 'react';
 import { trpc } from '../../lib/trpc';
 import { useForm } from '../../lib/form';
 
@@ -11,8 +8,9 @@ import { Textarea } from '../../components/Textarea';
 import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
 import { FormItems } from '../../components/FormItems';
+import { withPageWrapper } from '../../lib/pageWrapper';
 
-export const NewIdeaPage = () => {
+export const NewIdeaPage = withPageWrapper({ authorizedOnly: true })(() => {
   const createIdea = trpc.createIdea.useMutation();
 
   const { formik, buttonProps, alertProps } = useForm({
@@ -56,4 +54,4 @@ export const NewIdeaPage = () => {
       </form>
     </Segment>
   );
-};
+});

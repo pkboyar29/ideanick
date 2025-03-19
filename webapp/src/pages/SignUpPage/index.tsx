@@ -10,8 +10,11 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getAllIdeasRoute } from '../../lib/routes';
 import { useForm } from '../../lib/form';
+import { withPageWrapper } from '../../lib/pageWrapper';
 
-export const SignUpPage = () => {
+export const SignUpPage = withPageWrapper({
+  redirectAuthorized: true,
+})(() => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
   const signUp = trpc.signUp.useMutation();
@@ -66,4 +69,4 @@ export const SignUpPage = () => {
       </form>
     </Segment>
   );
-};
+});
