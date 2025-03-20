@@ -24,6 +24,8 @@ const checkAccessFn = <T,>(value: T, message?: string): void => {
   }
 };
 
+class GetAuthorizedMeError extends Error {}
+
 type Props = Record<string, any>;
 type QueryResult = UseTRPCQueryResult<any, any>;
 type QuerySuccessResult<TQueryResult extends QueryResult> =
@@ -38,6 +40,7 @@ type SetPropsProps<TQueryResult extends QueryResult | undefined> =
   HelperProps<TQueryResult> & {
     checkExists: typeof checkExistsFn;
     checkAccess: typeof checkAccessFn;
+    getAuthorizedMe: (message?: string) => NonNullable<AppContext['me']>;
   };
 type PageWrapperProps<
   TProps extends Props,
@@ -125,11 +128,19 @@ const PageWrapper = <
     }
   }
 
+  const getAuthorizedMe = (message?: string) => {
+    if (!ctx.me) {
+      throw new GetAuthorizedMeError(message);
+    }
+    return ctx.me;
+  };
+
   try {
     const props = setProps?.({
       ...helperProps,
       checkExists: checkExistsFn,
       checkAccess: checkAccessFn,
+      getAuthorizedMe,
     }) as TProps;
     return <Page {...props} />;
   } catch (error) {
@@ -146,6 +157,14 @@ const PageWrapper = <
         <ErrorPageComponent
           title={checkAccessTitle}
           message={error.message || checkAccessMessage}
+        />
+      );
+    }
+    if (error instanceof GetAuthorizedMeError) {
+      return (
+        <ErrorPageComponent
+          title={authorizedOnlyTitle}
+          message={error.message || authorizedOnlyMessage}
         />
       );
     }
