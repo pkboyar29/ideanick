@@ -14,6 +14,7 @@ import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const SignUpPage = withPageWrapper({
   redirectAuthorized: true,
+  title: 'Sign up',
 })(() => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();

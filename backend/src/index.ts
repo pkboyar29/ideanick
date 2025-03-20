@@ -5,7 +5,7 @@ import { applyTrpcToExpressApp } from './lib/trpc';
 import { applyPassportToExpressApp } from './lib/passport';
 import { AppContext, createAppContext } from './lib/ctx';
 import { env } from './lib/env';
-import { presetDb } from './scripts/presetDB';
+import { presetDb } from './scripts/presetDb';
 
 void (async () => {
   let ctx: AppContext | null = null;

@@ -104,6 +104,7 @@ export const EditProfilePage = withPageWrapper({
   setProps: ({ getAuthorizedMe }) => ({
     me: getAuthorizedMe(),
   }),
+  title: 'Edit profile',
 })(({ me }) => {
   return (
     <Segment title="Edit Profile">

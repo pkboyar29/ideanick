@@ -12,8 +12,12 @@ import { Segment } from '../../../components/Segment';
 import { Alert } from '../../../components/Alert';
 import { Loader } from '../../../components/Loader';
 import { layoutContentRef } from '../../../components/Layout';
+import { withPageWrapper } from '../../../lib/pageWrapper';
 
-export const AllIdeasPage = () => {
+export const AllIdeasPage = withPageWrapper({
+  title: 'Ideanick',
+  isTileExact: true,
+})(() => {
   const { formik } = useForm({
     initialValues: { search: '' },
     validationSchema: zGetIdeasTrpcInput.pick({ search: true }),
@@ -99,4 +103,4 @@ export const AllIdeasPage = () => {
       )}
     </Segment>
   );
-};
+});

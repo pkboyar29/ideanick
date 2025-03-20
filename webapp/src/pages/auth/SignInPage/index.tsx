@@ -13,6 +13,7 @@ import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,
+  title: 'Sign in',
 })(() => {
   const navigate = useNavigate();
 
