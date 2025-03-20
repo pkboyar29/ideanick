@@ -1,6 +1,7 @@
 import type { TrpcRouterOutput } from '@ideanick/backend/src/router';
 import { createContext, useContext } from 'react';
 import { trpc } from './trpc';
+import { Loader } from '../components/Loader';
 
 export type AppContext = {
   me: TrpcRouterOutput['getMe']['me'];
@@ -23,7 +24,7 @@ export const AppContextProvider = ({
       }}
     >
       {isLoading || isFetching ? (
-        <p>Loading...</p>
+        <Loader type="page" />
       ) : isError ? (
         <p>Error: {error.message}</p>
       ) : (

@@ -8,6 +8,7 @@ import { ErrorPageComponent } from '../components/ErrorPageComponent';
 import { useAppContext, type AppContext } from './ctx';
 import { getAllIdeasRoute } from './routes';
 import { NotFoundPage } from '../pages/other/NotFoundPage';
+import { Loader } from '../components/Loader';
 
 class CheckExistsError extends Error {}
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
@@ -96,7 +97,7 @@ const PageWrapper = <
   }, [redirectNeeded, navigate]);
 
   if (queryResult?.isLoading || queryResult?.isFetching || redirectNeeded) {
-    return <p>Loading...</p>;
+    return <Loader type="page" />;
   }
 
   if (queryResult?.isError) {
