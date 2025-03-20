@@ -16,6 +16,7 @@ import { withPageWrapper } from '../../../lib/pageWrapper';
 import { useForm } from '../../../lib/form';
 import { Button } from '../../../components/Button';
 import { LinkButton } from '../../../components/Button';
+import { Icon } from '../../../components/Icon';
 
 const LikeButton = ({
   idea,
@@ -52,7 +53,11 @@ const LikeButton = ({
         });
       }}
     >
-      {idea.isLikedByMe ? 'Unlike' : 'Like'}
+      <Icon
+        size={32}
+        className={css.likeIcon}
+        name={idea.isLikedByMe ? 'likeFilled' : 'likeEmpty'}
+      />
     </button>
   );
 };
