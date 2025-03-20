@@ -1,13 +1,13 @@
 import { trpc } from '../lib/trpc';
 import { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 
-import { getIdeaTrpcRoute } from './getIdea';
-import { getIdeasTrpcRoute } from './getIdeas';
-import { createIdeaTrpcRoute } from './createIdea';
-import { signUpTrpcRoute } from './signUp';
-import { signInTrpcRoute } from './signIn';
-import { getMeTrpcRoute } from './getMe';
-import { updateIdeaTrpcRoute } from './updateIdea';
+import { getIdeaTrpcRoute } from './ideas/getIdea';
+import { getIdeasTrpcRoute } from './ideas/getIdeas';
+import { createIdeaTrpcRoute } from './ideas/createIdea';
+import { signUpTrpcRoute } from './auth/signUp';
+import { signInTrpcRoute } from './auth/signIn';
+import { getMeTrpcRoute } from './auth/getMe';
+import { updateIdeaTrpcRoute } from './ideas/updateIdea';
 
 export const trpcRouter = trpc.router({
   getIdea: getIdeaTrpcRoute,
