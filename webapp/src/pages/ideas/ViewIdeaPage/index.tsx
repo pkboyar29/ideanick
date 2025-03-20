@@ -1,12 +1,15 @@
 import { format } from 'date-fns/format';
 import { useParams } from 'react-router-dom';
-import { LinkButton } from '../../components/Button';
-import { getEditIdeaRoute, type ViewIdeaRouteParams } from '../../lib/routes';
-import { trpc } from '../../lib/trpc';
+import { LinkButton } from '../../../components/Button';
+import {
+  getEditIdeaRoute,
+  type ViewIdeaRouteParams,
+} from '../../../lib/routes';
+import { trpc } from '../../../lib/trpc';
 import css from './index.module.scss';
 
-import { Segment } from '../../components/Segment';
-import { withPageWrapper } from '../../lib/pageWrapper';
+import { Segment } from '../../../components/Segment';
+import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const ViewIdeaPage = withPageWrapper({
   useQuery: () => {

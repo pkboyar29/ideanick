@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { getViewIdeaRoute } from '../../lib/routes';
-import { trpc } from '../../lib/trpc';
+import { getViewIdeaRoute } from '../../../lib/routes';
+import { trpc } from '../../../lib/trpc';
 import css from './index.module.scss';
 
-import { Segment } from '../../components/Segment';
+import { Segment } from '../../../components/Segment';
 
 export const AllIdeasPage = () => {
   const { data, error, isLoading, isFetching, isError } =

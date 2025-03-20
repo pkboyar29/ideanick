@@ -1,15 +1,15 @@
-import { zSignInTrpcInput } from '@ideanick/backend/src/router/signIn/input';
-import { Button } from '../../components/Button';
-import { FormItems } from '../../components/FormItems';
-import { Alert } from '../../components/Alert';
-import { Input } from '../../components/Input';
-import { Segment } from '../../components/Segment';
-import { trpc } from '../../lib/trpc';
+import { zSignInTrpcInput } from '@ideanick/backend/src/router/auth/signIn/input';
+import { Button } from '../../../components/Button';
+import { FormItems } from '../../../components/FormItems';
+import { Alert } from '../../../components/Alert';
+import { Input } from '../../../components/Input';
+import { Segment } from '../../../components/Segment';
+import { trpc } from '../../../lib/trpc';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getAllIdeasRoute } from '../../lib/routes';
-import { useForm } from '../../lib/form';
-import { withPageWrapper } from '../../lib/pageWrapper';
+import { getAllIdeasRoute } from '../../../lib/routes';
+import { useForm } from '../../../lib/form';
+import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,

@@ -1,16 +1,19 @@
-import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/updateIdea/input';
+import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/updateIdea/input';
 import pick from 'lodash/pick';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Alert } from '../../components/Alert';
-import { Button } from '../../components/Button';
-import { FormItems } from '../../components/FormItems';
-import { Input } from '../../components/Input';
-import { Segment } from '../../components/Segment';
-import { Textarea } from '../../components/Textarea';
-import { type EditIdeaRouteParams, getViewIdeaRoute } from '../../lib/routes';
-import { trpc } from '../../lib/trpc';
-import { useForm } from '../../lib/form';
-import { withPageWrapper } from '../../lib/pageWrapper';
+import { Alert } from '../../../components/Alert';
+import { Button } from '../../../components/Button';
+import { FormItems } from '../../../components/FormItems';
+import { Input } from '../../../components/Input';
+import { Segment } from '../../../components/Segment';
+import { Textarea } from '../../../components/Textarea';
+import {
+  type EditIdeaRouteParams,
+  getViewIdeaRoute,
+} from '../../../lib/routes';
+import { trpc } from '../../../lib/trpc';
+import { useForm } from '../../../lib/form';
+import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const EditIdeaPage = withPageWrapper({
   authorizedOnly: true,

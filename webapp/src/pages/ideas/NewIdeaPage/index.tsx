@@ -1,14 +1,14 @@
-import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input';
-import { trpc } from '../../lib/trpc';
-import { useForm } from '../../lib/form';
+import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/createIdea/input';
+import { trpc } from '../../../lib/trpc';
+import { useForm } from '../../../lib/form';
 
-import { Segment } from '../../components/Segment';
-import { Input } from '../../components/Input';
-import { Textarea } from '../../components/Textarea';
-import { Alert } from '../../components/Alert';
-import { Button } from '../../components/Button';
-import { FormItems } from '../../components/FormItems';
-import { withPageWrapper } from '../../lib/pageWrapper';
+import { Segment } from '../../../components/Segment';
+import { Input } from '../../../components/Input';
+import { Textarea } from '../../../components/Textarea';
+import { Alert } from '../../../components/Alert';
+import { Button } from '../../../components/Button';
+import { FormItems } from '../../../components/FormItems';
+import { withPageWrapper } from '../../../lib/pageWrapper';
 
 export const NewIdeaPage = withPageWrapper({ authorizedOnly: true })(() => {
   const createIdea = trpc.createIdea.useMutation();
