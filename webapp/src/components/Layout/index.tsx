@@ -5,6 +5,7 @@ import {
   getSignUpRoute,
   getSignInRoute,
   getSignOutRoute,
+  getEditProfileRoute,
 } from '../../lib/routes';
 import css from './index.module.scss';
 import { useMe } from '../../lib/ctx';
@@ -29,6 +30,11 @@ export const Layout = () => {
               <li className={css.item}>
                 <Link className={css.link} to={getNewIdeaRoute()}>
                   Add Idea
+                </Link>
+              </li>
+              <li className={css.item}>
+                <Link className={css.link} to={getEditProfileRoute()}>
+                  Edit Profile
                 </Link>
               </li>
               <li className={css.item}>
