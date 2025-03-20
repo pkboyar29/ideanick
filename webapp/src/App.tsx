@@ -12,6 +12,7 @@ import { Layout } from './components/Layout';
 import { SignOutPage } from './pages/SignOutPage';
 import { EditIdeaPage } from './pages/EditIdeaPage';
 import { AppContextProvider } from './lib/ctx';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App = () => {
   return (
@@ -39,6 +40,7 @@ export const App = () => {
                 path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)}
                 element={<EditIdeaPage />}
               />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>{' '}
           </Routes>
         </BrowserRouter>
