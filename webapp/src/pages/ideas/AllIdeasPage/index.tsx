@@ -3,6 +3,10 @@ import { getViewIdeaRoute } from '../../../lib/routes';
 import { trpc } from '../../../lib/trpc';
 import css from './index.module.scss';
 import InfiniteScroll from 'react-infinite-scroller';
+import { useDebounce } from 'usehooks-ts';
+import { useForm } from '../../../lib/form';
+import { zGetIdeasTrpcInput } from '@ideanick/backend/src/router/ideas/getIdeas/input';
+import { Input } from '../../../components/Input';
 
 import { Segment } from '../../../components/Segment';
 import { Alert } from '../../../components/Alert';
@@ -10,6 +14,12 @@ import { Loader } from '../../../components/Loader';
 import { layoutContentRef } from '../../../components/Layout';
 
 export const AllIdeasPage = () => {
+  const { formik } = useForm({
+    initialValues: { search: '' },
+    validationSchema: zGetIdeasTrpcInput.pick({ search: true }),
+  });
+  const search = useDebounce(formik.values.search, 300);
+
   const {
     data,
     error,
@@ -22,7 +32,7 @@ export const AllIdeasPage = () => {
     isRefetching,
   } = trpc.getIdeas.useInfiniteQuery(
     {
-      limit: 2,
+      search,
     },
     {
       getNextPageParam: (lastPage) => {
@@ -33,10 +43,15 @@ export const AllIdeasPage = () => {
 
   return (
     <Segment title="All ideas">
+      <div className={css.filter}>
+        <Input maxWidth={'100%'} label="Search" name="search" formik={formik} />
+      </div>
       {isLoading || isRefetching ? (
         <Loader type="section" />
       ) : isError ? (
         <Alert color="red">{error.message}</Alert>
+      ) : !data.pages[0].ideas.length ? (
+        <Alert color="brown">Nothing found by search</Alert>
       ) : (
         <div className={css.ideas}>
           <InfiniteScroll

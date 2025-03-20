@@ -2,7 +2,7 @@ import cn from 'classnames';
 import css from './index.module.scss';
 
 export type AlertProps = {
-  color: 'red' | 'green';
+  color: 'red' | 'green' | 'brown';
   hidden?: boolean;
   children: React.ReactNode;
 };
