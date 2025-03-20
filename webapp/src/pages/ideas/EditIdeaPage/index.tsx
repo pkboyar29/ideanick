@@ -14,6 +14,7 @@ import {
 import { trpc } from '../../../lib/trpc';
 import { useForm } from '../../../lib/form';
 import { withPageWrapper } from '../../../lib/pageWrapper';
+import { canEditIdea } from '@ideanick/backend/src/utils/can';
 
 export const EditIdeaPage = withPageWrapper({
   authorizedOnly: true,
@@ -24,7 +25,7 @@ export const EditIdeaPage = withPageWrapper({
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const idea = checkExists(queryResult.data.idea, 'Idea not found');
     checkAccess(
-      ctx.me?.id === idea.authorId,
+      canEditIdea(ctx.me, idea),
       'An idea can only be edited by the author'
     );
     return {

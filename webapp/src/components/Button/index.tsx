@@ -2,12 +2,22 @@ import cn from 'classnames';
 import css from './index.module.scss';
 import { Link } from 'react-router-dom';
 
-export type ButtonProps = { children: React.ReactNode; loading?: boolean };
-export const Button = ({ children, loading = false }: ButtonProps) => {
+type ButtonColor = 'green' | 'red';
+export type ButtonProps = {
+  children: React.ReactNode;
+  loading?: boolean;
+  color?: ButtonColor;
+};
+export const Button = ({
+  children,
+  loading = false,
+  color = 'green',
+}: ButtonProps) => {
   return (
     <button
       className={cn({
         [css.button]: true,
+        [css[`color-${color}`]]: true,
         [css.disabled]: loading,
         [css.loading]: loading,
       })}
@@ -22,12 +32,17 @@ export const Button = ({ children, loading = false }: ButtonProps) => {
 export const LinkButton = ({
   children,
   to,
+  color = 'green',
 }: {
   children: React.ReactNode;
   to: string;
+  color?: ButtonColor;
 }) => {
   return (
-    <Link className={cn({ [css.button]: true })} to={to}>
+    <Link
+      className={cn({ [css.button]: true, [css[`color-${color}`]]: true })}
+      to={to}
+    >
       {children}
     </Link>
   );
