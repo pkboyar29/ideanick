@@ -3,13 +3,15 @@ import { z } from 'zod';
 
 dotenv.config();
 
+const zNonemptyTrimmed = z.string().trim().min(1);
+
 const zEnv = z.object({
-  PORT: z.string().trim().min(1),
-  DATABASE_URL: z.string().trim().min(1),
-  JWT_SECRET: z.string().trim().min(1),
-  PASSWORD_SALT: z.string().trim().min(1),
-  INITIAL_ADMIN_PASSWORD: z.string().trim().min(1),
-  WEBAPP_URL: z.string().trim().min(1),
+  PORT: zNonemptyTrimmed,
+  DATABASE_URL: zNonemptyTrimmed,
+  JWT_SECRET: zNonemptyTrimmed,
+  PASSWORD_SALT: zNonemptyTrimmed,
+  INITIAL_ADMIN_PASSWORD: zNonemptyTrimmed,
+  WEBAPP_URL: zNonemptyTrimmed,
 });
 
 export const env = zEnv.parse(process.env);
