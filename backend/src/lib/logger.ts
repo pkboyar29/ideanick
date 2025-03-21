@@ -28,7 +28,6 @@ const winstonLogger = winston.createLogger({
                 error: (str: string) => pc.red(str),
                 debug: (str: string) => pc.cyan(str),
               }[logData.level as 'info' | 'error' | 'debug'];
-              console.log(logData);
 
               const levelAndType = `${logData.level} ${logData.logType}`;
               const topMessage = `${setColor(levelAndType)} ${pc.green(
