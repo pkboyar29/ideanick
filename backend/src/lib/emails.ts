@@ -5,6 +5,17 @@ import fg from 'fast-glob';
 import _ from 'lodash';
 import { env } from './env';
 import Handlebars from 'handlebars';
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  host: '',
+  port: 465, // используем SSL
+  secure: true, // true для 465, false для 587
+  auth: {
+    user: 'sanyaursa@gmail.com',
+    pass: '29092003a',
+  },
+});
 
 const getHbrTemplates = _.memoize(async () => {
   // const htmlPathsPattern = path.resolve(__dirname, '../emails/dist/**/*.html');
@@ -47,14 +58,27 @@ const sendEmail = async ({
       homeUrl: env.WEBAPP_URL,
     };
     const html = await getEmailHtml(templateName, fullTemplateVaraibles);
-    console.info('sendEmail', {
+
+    const mailOptions = {
+      from: 'sanyaursa@gmail.com',
       to,
       subject,
-      templateName,
-      fullTemplateVaraibles,
       html,
+    };
+
+    // console.info('sendEmail', {
+    //   mailOptions,
+    // });
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+        return { ok: false };
+      } else {
+        console.log('Письмо отправлено:', info.response);
+        return { ok: true };
+      }
     });
-    return { ok: true };
   } catch (error) {
     console.error(error);
     return { ok: false };
