@@ -1,3 +1,4 @@
+import { useStore } from '@nanostores/react';
 import {
   type UseTRPCQueryResult,
   type UseTRPCQuerySuccessResult,
@@ -6,10 +7,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ErrorPageComponent } from '../components/ErrorPageComponent';
 import { useAppContext, type AppContext } from './ctx';
-import { getAllIdeasRoute } from './routes';
 import { NotFoundPage } from '../pages/other/NotFoundPage';
 import { Loader } from '../components/Loader';
 import { Helmet } from 'react-helmet-async';
+import { lastVisistedNotAuthRouteStore } from '../components/NotAuthRouteTracker';
 
 class CheckExistsError extends Error {}
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
@@ -93,17 +94,19 @@ const PageWrapper = <
   title,
   isTileExact = false,
 }: PageWrapperProps<TProps, TQueryResult>) => {
+  const lastVisistedNotAuthRoute = useStore(lastVisistedNotAuthRouteStore);
   const navigate = useNavigate();
   const ctx = useAppContext();
   const queryResult = useQuery?.();
 
   const redirectNeeded = redirectAuthorized && ctx.me;
 
+  // почему-то redirectNeeded всегда undefined
   useEffect(() => {
     if (redirectNeeded) {
-      navigate(getAllIdeasRoute(), { replace: true });
+      navigate(lastVisistedNotAuthRoute, { replace: true });
     }
-  }, [redirectNeeded, navigate]);
+  }, [redirectNeeded, navigate, lastVisistedNotAuthRoute]);
 
   if (
     queryResult?.isLoading ||

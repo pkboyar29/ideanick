@@ -15,6 +15,7 @@ import { EditIdeaPage } from './pages/ideas/EditIdeaPage';
 import { AppContextProvider } from './lib/ctx';
 import { NotFoundPage } from './pages/other/NotFoundPage';
 import { EditProfilePage } from './pages/auth/EditProfilePage';
+import { NotAuthRouteTracker } from './components/NotAuthRouteTracker';
 
 const helmetContext = {};
 
@@ -24,6 +25,7 @@ export const App = () => {
       <TrpcProvider>
         <AppContextProvider>
           <BrowserRouter>
+            <NotAuthRouteTracker />
             <Routes>
               <Route
                 path={routes.getSignOutRoute.definition}
