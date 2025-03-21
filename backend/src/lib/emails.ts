@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { env } from './env';
 import Handlebars from 'handlebars';
 import nodemailer from 'nodemailer';
+import { logger } from './logger';
 
 const transporter = nodemailer.createTransport({
   host: '',
@@ -66,21 +67,20 @@ const sendEmail = async ({
       html,
     };
 
-    // console.info('sendEmail', {
-    //   mailOptions,
-    // });
+    logger.info('email', 'Mail options', {
+      mailOptions,
+    });
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.log(err);
         return { ok: false };
       } else {
-        console.log('Письмо отправлено:', info.response);
+        logger.info('email', 'Письмо отправлено');
         return { ok: true };
       }
     });
   } catch (error) {
-    console.error(error);
+    logger.error('email', error);
     return { ok: false };
   }
 };

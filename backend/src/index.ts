@@ -6,6 +6,7 @@ import { applyPassportToExpressApp } from './lib/passport';
 import { AppContext, createAppContext } from './lib/ctx';
 import { env } from './lib/env';
 import { presetDb } from './scripts/presetDb';
+import { logger } from './lib/logger';
 
 void (async () => {
   let ctx: AppContext | null = null;
@@ -20,10 +21,10 @@ void (async () => {
     applyPassportToExpressApp(expressApp, ctx);
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter);
     expressApp.listen(env.PORT, () => {
-      console.info(`Listening at http://localhost:${env.PORT}`);
+      logger.info('express', `Listening at http://localhost:${env.PORT}`);
     });
   } catch (error) {
-    console.error(error);
+    logger.error('app', error);
     await ctx?.stop();
   }
 })();

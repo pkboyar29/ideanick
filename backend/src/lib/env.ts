@@ -12,6 +12,7 @@ const zEnv = z.object({
   PASSWORD_SALT: zNonemptyTrimmed,
   INITIAL_ADMIN_PASSWORD: zNonemptyTrimmed,
   WEBAPP_URL: zNonemptyTrimmed,
+  HOST_ENV: zNonemptyTrimmed,
 });
 
 export const env = zEnv.parse(process.env);
